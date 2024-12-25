@@ -31,20 +31,23 @@ cd dnmp
 ## 目錄結構
 ```
 /
-├── docker-compose.yml    
+├── docker-compose.yml
+├── mysql/
+│   ├── data/
+│   └── my.cnf
 ├── nginx/
 │   ├── conf.d/
 │   │   ├── example.conf  
 │   │   └── laravel.conf  
 │   └── logs/            
 ├── php/                
-│   ├── Dockerfile       
-│   └── extensions/      # PHP擴展目錄
-├── mysql/
-│   ├── data/
-│   └── my.cnf
+│   ├── extensions/      # PHP擴展目錄
+│   └── Dockerfile       
 ├── redis/
 │   └── data/
+├── sites/
+│   └── example/
+│       └── index.php
 └── README.md
 ```
 # 使用方式
@@ -57,7 +60,7 @@ docker-compose up -d
 docker-compose ps
 ```
 ## 測試服務
-1. 瀏覽器以下地址測試服務
+1. 瀏覽以下網址測試
    * 預設站點： `http：//localhost`
    * laravel站點： `http：//laravel.local`
    * 範例站點： `http://example.local`

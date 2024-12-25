@@ -1,0 +1,44 @@
+services:
+  nginx:
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: nginx:1.24.0
+    container_name: dnmp_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+      - ./sites:/var/www
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: dnmp_php
+    volumes:
+      - ./php/extensions:/var/www/extensions
+      - ./sites:/var/www  
+
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    container_name: dnmp_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      
+
+  redis:
+    image: redis:alpine
+    container_name: dnmp_redis
+    volumes:
+     - ./redis/data:/data
+    
