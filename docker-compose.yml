@@ -10,18 +10,28 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
-      - ./sites:/var/www
+      - ./sites:/var/www/html
     depends_on:
-      - php
+      - php81
+      - php83
 
-  php:
+  php81:
     build:
-      context: ./php
-      dockerfile: Dockerfile
-    container_name: dnmp_php
+      context: .
+      dockerfile: /php/8.1/Dockerfile
+    container_name: dnmp_php81
     volumes:
-      - ./php/extensions:/var/www/extensions
-      - ./sites:/var/www  
+      - ./php/extensions:/var/www/html/extensions
+      - ./sites:/var/www/html
+
+  php83:
+    build:
+      context: .
+      dockerfile: /php/8.3/Dockerfile
+    container_name: dnmp_php83
+    volumes:
+      - ./php/extensions:/var/www/html/extensions
+      - ./sites:/var/www/html
 
   mysql:
     build:

@@ -39,10 +39,16 @@ cd dnmp
 │   ├── conf.d/
 │   │   ├── example.conf  
 │   │   └── laravel.conf  
-│   └── logs/            
+│   │── logs/            
+│   └── Dockerfile
 ├── php/                
-│   ├── extensions/      # PHP擴展目錄
-│   └── Dockerfile       
+│   ├── 8.1/
+│   │   │── extensions/
+│   │   └── Dockerfile       
+│   ├── 8.3/
+│   │   └── Dockerfile       
+│   └── shared/
+│   │   └── install_extensions.sh # 共用php擴展
 ├── redis/
 │   └── data/
 ├── sites/
